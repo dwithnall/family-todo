@@ -67,7 +67,11 @@ CREATE TABLE task (
   created_at               INTEGER NOT NULL,
   updated_at               INTEGER NOT NULL,
   CHECK (due_time IS NULL OR due_date IS NOT NULL),
-  CHECK (repeat_rule IS NULL OR (due_date IS NOT NULL AND anchor_date IS NOT NULL))
+  CHECK (repeat_rule IS NULL OR (due_date IS NOT NULL AND anchor_date IS NOT NULL)),
+  CHECK (due_date IS NULL OR due_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'),
+  CHECK (anchor_date IS NULL OR anchor_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'),
+  CHECK (due_time IS NULL OR due_time GLOB '[0-2][0-9]:[0-5][0-9]'),
+  CHECK (repeat_rule IS NULL OR json_valid(repeat_rule))
 );
 CREATE INDEX task_by_list_revision ON task (list_id, revision);
 -- The per-minute reminder query reads only due rows through this index.
