@@ -1,0 +1,41 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "family-todo",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  // Fill these in once the Access application exists (docs/aidlc/plans/bolt-1.md).
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "DEFAULT_TIME_ZONE": "UTC"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "family-todo",
+      // Replace with the id printed by: wrangler d1 create family-todo
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../migrations"
+    }
+  ],
+  "env": {
+    "preview": {
+      "name": "family-todo-preview",
+      "vars": {
+        "ACCESS_TEAM_DOMAIN": "",
+        "ACCESS_AUD": "",
+        "DEFAULT_TIME_ZONE": "UTC"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "family-todo-preview",
+          // Replace with the id printed by: wrangler d1 create family-todo-preview
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "../../migrations"
+        }
+      ]
+    }
+  }
+}
