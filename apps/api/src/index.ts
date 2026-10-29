@@ -1,0 +1,7 @@
+import { createApp, type Env } from "./app.js";
+
+const app = createApp();
+
+export default {
+  fetch: app.fetch,
+} satisfies ExportedHandler<Env>;
